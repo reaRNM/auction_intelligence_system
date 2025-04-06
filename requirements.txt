@@ -1,0 +1,107 @@
+# Core dependencies
+fastapi>=0.104.0
+uvicorn>=0.24.0
+sqlalchemy>=2.0.0
+alembic>=1.12.0
+psycopg2-binary>=2.9.9
+redis>=5.0.1
+pydantic>=2.5.0
+python-jose>=3.3.0
+passlib>=1.7.4
+python-multipart>=0.0.6
+click>=8.1.7
+rich>=13.7.0
+configparser>=6.0.0
+
+# Web interface
+streamlit>=1.29.0
+plotly>=5.18.0
+firebase-admin>=6.3.0
+websockets>=12.0
+
+# CLI tools
+typer>=0.9.0
+prompt-toolkit>=3.0.41
+pyfiglet>=1.0.2
+tqdm>=4.66.1
+
+# Testing
+pytest>=7.4.3
+pytest-asyncio>=0.23.2
+httpx>=0.25.2
+
+# Development
+black>=23.11.0
+isort>=5.12.0
+flake8>=6.1.0
+mypy>=1.7.1
+
+# Data processing
+pandas>=2.1.3
+numpy>=1.26.2
+beautifulsoup4>=4.12.2
+requests>=2.31.0
+aiohttp>=3.9.1
+
+# Documentation
+mkdocs>=1.5.3
+mkdocs-material>=9.4.14
+mkdocstrings>=0.24.0
+
+# Web Scraping
+selenium>=4.15.2
+fake-useragent>=1.4.0
+lxml>=4.9.3
+
+# Task Queue
+celery>=5.3.4
+flower>=2.0.1
+
+# AI/ML
+pydantic-settings==2.0.3
+python-dotenv==1.0.0
+streamlit==1.28.0
+sqlalchemy==2.0.23
+alembic==1.12.1
+psycopg2-binary==2.9.9
+asyncpg==0.28.0
+redis==5.0.1
+celery==5.3.4
+flower==2.0.1
+
+# Web Scraping
+requests==2.31.0
+beautifulsoup4==4.12.2
+selenium==4.15.2
+fake-useragent==1.4.0
+aiohttp==3.8.6
+lxml==4.9.3
+
+# Data Processing
+pandas==2.1.3
+numpy==1.26.2
+scikit-learn==1.3.2
+scipy==1.11.3
+matplotlib==3.8.0
+seaborn==0.13.0
+plotly==5.18.0
+
+# AI/ML
+openai==1.3.5
+transformers==4.35.2
+torch==2.1.1
+sentence-transformers==2.2.2
+ray==2.7.0
+ray[tune]==2.7.0
+ray[serve]==2.7.0
+
+# API Integrations
+ebaysdk==2.2.0
+keepa==1.3.0
+shippo==3.0.0
+
+# Testing
+pytest-cov==4.1.0
+
+# Development
+pre-commit==3.5.0 

@@ -1,0 +1,123 @@
+version: '3.8'
+
+services:
+  # FastAPI Backend
+  api:
+    build:
+      context: .
+      dockerfile: docker/api.Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app/src
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/auction_intelligence
+      - REDIS_URL=redis://redis:6379/0
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - EBAY_API_KEY=${EBAY_API_KEY}
+      - KEEPA_API_KEY=${KEEPA_API_KEY}
+      - SHIPPO_API_KEY=${SHIPPO_API_KEY}
+    depends_on:
+      - db
+      - redis
+    networks:
+      - auction_network
+
+  # Streamlit Frontend
+  ui:
+    build:
+      context: .
+      dockerfile: docker/ui.Dockerfile
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./src:/app/src
+    environment:
+      - API_URL=http://api:8000
+    depends_on:
+      - api
+    networks:
+      - auction_network
+
+  # PostgreSQL Database
+  db:
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=auction_intelligence
+    networks:
+      - auction_network
+
+  # Redis for Caching
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - auction_network
+
+  # Celery Worker for Async Tasks
+  celery_worker:
+    build:
+      context: .
+      dockerfile: docker/celery.Dockerfile
+    volumes:
+      - ./src:/app/src
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/auction_intelligence
+      - REDIS_URL=redis://redis:6379/0
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - EBAY_API_KEY=${EBAY_API_KEY}
+      - KEEPA_API_KEY=${KEEPA_API_KEY}
+      - SHIPPO_API_KEY=${SHIPPO_API_KEY}
+    depends_on:
+      - db
+      - redis
+    networks:
+      - auction_network
+
+  # Celery Beat for Scheduled Tasks
+  celery_beat:
+    build:
+      context: .
+      dockerfile: docker/celery.Dockerfile
+    command: celery -A src.services.celery_app beat --loglevel=info
+    volumes:
+      - ./src:/app/src
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/auction_intelligence
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - db
+      - redis
+    networks:
+      - auction_network
+
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:1.25
+    ports:
+      - "80:80"
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api
+      - ui
+    networks:
+      - auction_network
+
+networks:
+  auction_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data: 
