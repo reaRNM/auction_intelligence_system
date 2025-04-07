@@ -1,3 +1,95 @@
+# Secrets Management
+
+This document outlines how to handle sensitive information in the Auction Intelligence System.
+
+## Types of Secrets
+
+1. **API Keys**
+   - Amazon API keys
+   - eBay API keys
+   - Shipping carrier API keys
+   - External service API keys
+
+2. **Database Credentials**
+   - Database URLs
+   - Usernames
+   - Passwords
+
+3. **Authentication Tokens**
+   - JWT secrets
+   - OAuth tokens
+   - Session keys
+
+4. **Encryption Keys**
+   - Data encryption keys
+   - SSL/TLS certificates
+   - SSH keys
+
+## Storing Secrets
+
+### Development Environment
+- Use `.env` files (not committed to git)
+- Use local environment variables
+- Use development key vaults
+
+### Production Environment
+- Use GitHub Secrets for CI/CD
+- Use environment variables in deployment
+- Use cloud key vaults (AWS Secrets Manager, Azure Key Vault)
+
+## GitHub Secrets
+
+Required secrets for GitHub Actions:
+
+```yaml
+SNYK_TOKEN: # Snyk API token for security scanning
+SONAR_TOKEN: # SonarCloud token for code analysis
+GITHUB_TOKEN: # GitHub token for repository access
+AWS_ACCESS_KEY_ID: # AWS access key for deployment
+AWS_SECRET_ACCESS_KEY: # AWS secret key for deployment
+DB_URL: # Database connection URL
+```
+
+## Local Development Setup
+
+1. Copy `.env.template` to `.env`:
+   ```bash
+   cp .env.template .env
+   ```
+
+2. Fill in the required values in `.env`
+
+3. Never commit `.env` to version control
+
+## Security Best Practices
+
+1. **Never** commit secrets to version control
+2. Rotate secrets regularly
+3. Use different secrets for different environments
+4. Follow the principle of least privilege
+5. Audit secret usage regularly
+6. Use secret scanning tools
+7. Encrypt secrets at rest
+8. Use secure channels for secret transmission
+
+## Emergency Procedures
+
+If secrets are compromised:
+
+1. Immediately rotate all affected secrets
+2. Audit systems for unauthorized access
+3. Update documentation
+4. Notify affected parties
+5. Review access logs
+6. Update security policies if needed
+
+## Tools and Resources
+
+- [GitHub Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets)
+- [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/)
+- [Azure Key Vault](https://azure.microsoft.com/en-us/services/key-vault/)
+- [HashiCorp Vault](https://www.vaultproject.io/)
+
 # Required GitHub Secrets
 
 This document outlines the required secrets for the CI/CD pipeline and development environment. **DO NOT** commit actual secret values to the repository.

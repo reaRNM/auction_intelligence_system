@@ -2,75 +2,65 @@
 
 ## Supported Versions
 
+We provide security updates for the following versions:
+
 | Version | Supported          |
 | ------- | ------------------ |
 | 1.0.x   | :white_check_mark: |
+| < 1.0   | :x:                |
 
 ## Reporting a Vulnerability
 
-We take the security of Auction Intelligence System seriously. If you believe you've found a security vulnerability, please follow these steps:
+We take the security of our software seriously. If you believe you've found a security vulnerability, please follow these steps:
 
-1. **DO NOT** disclose the vulnerability publicly until it has been addressed by our team.
-
-2. Email your findings to [SECURITY_EMAIL]. Please include:
-   - Type of vulnerability
+1. **Do not** disclose the vulnerability publicly until it has been addressed by our team.
+2. Email your findings to security@example.com (replace with your security contact email).
+3. Include as much information as possible about the vulnerability:
+   - The type of vulnerability
    - Steps to reproduce
    - Potential impact
-   - Suggested fixes (if any)
-
-3. You should receive a response within 48 hours. If you don't, please follow up via email.
-
-4. Please provide sufficient information to reproduce the vulnerability, as we will need to verify and reproduce the issue.
+   - Any suggested fixes
 
 ## Security Measures
 
-Our application implements several security measures:
+Our project implements the following security measures:
 
-1. **Authentication & Authorization**
-   - JWT-based authentication
-   - Role-based access control
-   - Session management
-   - API key rotation
-
-2. **Data Protection**
-   - Encryption at rest
-   - TLS/SSL for data in transit
-   - Secure configuration management
-   - Regular security audits
-
-3. **Infrastructure Security**
-   - Container security scanning
-   - Dependency vulnerability checks
-   - Regular security updates
-   - Network isolation
-
-4. **Monitoring & Logging**
-   - Security event logging
-   - Audit trails
-   - Intrusion detection
-   - Performance monitoring
+- Regular security audits
+- Automated dependency scanning
+- CodeQL analysis
+- Bandit security scanning
+- Safety checks for Python dependencies
+- Snyk vulnerability scanning
 
 ## Security Updates
 
-Security updates will be released as needed. Critical security patches will be released immediately.
+We release security updates as soon as possible after vulnerabilities are discovered and patched. All security updates are tagged with [SECURITY] in the commit message.
 
 ## Responsible Disclosure
 
-We follow responsible disclosure practices. If you report a vulnerability:
+We follow a responsible disclosure policy:
+- We will acknowledge receipt of your vulnerability report within 48 hours
+- We will provide a more detailed response within 7 days
+- We will keep you informed about our progress in addressing the issue
+- We will publicly acknowledge your responsible disclosure (if you wish)
 
-1. We will acknowledge receipt within 48 hours
-2. We will keep you informed of our progress
-3. We will publicly acknowledge your responsible disclosure
-4. We will work with you to ensure the vulnerability is properly addressed
+## Security Checklist
 
-## Security Best Practices
+Before submitting a pull request, ensure:
 
-When using our system:
+1. All dependencies are up to date
+2. No sensitive data is exposed
+3. Input validation is implemented
+4. Authentication and authorization are properly handled
+5. Error messages don't reveal sensitive information
+6. All security tests pass
 
-1. Keep your API keys secure
-2. Use strong passwords
-3. Enable 2FA when available
-4. Regularly update your dependencies
-5. Follow the principle of least privilege
-6. Monitor your account activity
-7. Report suspicious activity immediately 
+## Security Tools
+
+We use the following tools to maintain security:
+
+- GitHub Actions for automated security scanning
+- CodeQL for static code analysis
+- Bandit for Python security scanning
+- Safety for dependency vulnerability checking
+- Snyk for comprehensive security scanning 
